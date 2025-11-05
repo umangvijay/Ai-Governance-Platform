@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Governance Platform - Maharashtra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .feature-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .result-item {
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .chart {
+            margin-top: 15px;
+            max-height: 300px;
+        }
+
+        .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏛️ AI Governance Platform</h1>
+            <p>Transforming Citizen Service Delivery in Maharashtra</p>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value" id="total-datasets">-</div>
+                <div class="stat-label">Datasets Loaded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="total-records">-</div>
+                <div class="stat-label">Total Records</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="models-loaded">-</div>
+                <div class="stat-label">ML Models Active</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">✓</div>
+                <div class="stat-label">System Status</div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <!-- Health Risk Prediction -->
+            <div class="feature-card">
+                <div class="icon">🏥</div>
+                <h3>Health Risk Predictor</h3>
+                <p>Forecast disease outbreak risks and healthcare demand</p>
+                
+                <div class="input-group">
+                    <label>Forecast Days:</label>
+                    <input type="number" id="health-days" value="7" min="1" max="30">
+                </div>
+                
+                <button class="btn" onclick="predictHealth()">Generate Forecast</button>
+                
+                <div class="loading" id="health-loading">
+                    <div class="spinner"></div>
+                    <p>Generating prediction...</p>
+                </div>
+                
+                <div class="result-box" id="health-result">
+                    <h4>Health Risk Forecast</h4>
+                    <div id="health-content"></div>
+                </div>
+            </div>
+
+            <!-- Infrastructure Risk -->
+            <div class="feature-card">
+                <div class="icon">🏗️</div>
+                <h3>Infrastructure Failure Predictor</h3>
+                <p>Identify high-risk infrastructure locations</p>
+                
+                <div class="input-group">
+                    <label>Response Time (hours):</label>
+                    <input type="number" id="infra-response" value="24" min="1" max="168">
+                </div>
+                
+                <div class="input-group">
+                    <label>Citizen Satisfaction (1-5):</label>
+                    <input type="number" id="infra-satisfaction" value="3" min="1" max="5">
+                </div>
+                
+                <div class="input-group">
+                    <label>Recurring Issue:</label>
+                    <select id="infra-recurring">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <button class="btn" onclick="predictInfrastructure()">Predict Risk</button>
+                
+                <div class="loading" id="infra-loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing risk...</p>
+                </div>
+                
+                <div class="result-box" id="infra-result">
+                    <h4>Risk Assessment</h4>
+                    <div id="infra-content"></div>
+                </div>
+            </div>
+
+            <!-- Demand Forecasting -->
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Service Demand Forecaster</h3>
+                <p>Predict future service request volumes</p>
+                
+                <div class="input-group">
+                    <label>Forecast Hours:</label>
+                    <input type="number" id="demand-hours" value="24" min="1" max="72">
+                </div>
+                
+                <button class="btn" onclick="predictDemand()">Forecast Demand</button>
+                
+                <div class="loading" id="demand-loading">
+                    <div class="spinner"></div>
+                    <p>Forecasting demand...</p>
+                </div>
+                
+                <div class="result-box" id="demand-result">
+                    <h4>Demand Forecast</h4>
+                    <div id="demand-content"></div>
+                </div>
+            </div>
+
+            <!-- Sentiment Analysis -->
+            <div class="feature-card">
+                <div class="icon">💬</div>
+                <h3>Sentiment Analyzer</h3>
+                <p>Analyze citizen feedback sentiment</p>
+                
+                <div class="input-group">
+                    <label>Citizen Feedback:</label>
+                    <textarea id="sentiment-text" rows="3" placeholder="Enter citizen feedback here..."></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label>Rating (1-5):</label>
+                    <input type="number" id="sentiment-rating" value="3" min="1" max="5">
+                </div>
+                
+                <button class="btn" onclick="analyzeSentiment()">Analyze Sentiment</button>
+                
+                <div class="loading" id="sentiment-loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing sentiment...</p>
+                </div>
+                
+                <div class="result-box" id="sentiment-result">
+                    <h4>Sentiment Analysis</h4>
+                    <div id="sentiment-content"></div>
+                </div>
+            </div>
+
+            <!-- RAG Query -->
+            <div class="feature-card">
+                <div class="icon">🤖</div>
+                <h3>AI Assistant (RAG)</h3>
+                <p>Ask questions about governance data</p>
+                
+                <div class="input-group">
+                    <label>Your Question:</label>
+                    <textarea id="rag-question" rows="3" placeholder="Ask anything about the data..."></textarea>
+                </div>
+                
+                <button class="btn" onclick="queryRAG()">Ask AI</button>
+                
+                <div class="loading" id="rag-loading">
+                    <div class="spinner"></div>
+                    <p>Thinking...</p>
+                </div>
+                
+                <div class="result-box" id="rag-result">
+                    <h4>AI Response</h4>
+                    <div id="rag-content"></div>
+                </div>
+            </div>
+
+            <!-- Data Anonymization -->
+            <div class="feature-card">
+                <div class="icon">🔒</div>
+                <h3>Data Anonymizer</h3>
+                <p>Detect and mask personally identifiable information</p>
+                
+                <div class="input-group">
+                    <label>Text with PII:</label>
+                    <textarea id="anonymize-text" rows="3" placeholder="Enter text with phone numbers, emails, etc..."></textarea>
+                </div>
+                
+                <button class="btn" onclick="anonymizeText()">Anonymize</button>
+                
+                <div class="loading" id="anonymize-loading">
+                    <div class="spinner"></div>
+                    <p>Anonymizing...</p>
+                </div>
+                
+                <div class="result-box" id="anonymize-result">
+                    <h4>Anonymized Result</h4>
+                    <div id="anonymize-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>AI-Powered Governance Platform for Maharashtra</p>
+            <p>© 2024 - Transforming Citizen Service Delivery</p>
+        </footer>
+    </div>
+
+    <script>
+        // Load stats on page load
+        window.addEventListener('load', loadStats);
+
+        function loadStats() {
+            fetch('/api/stats')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('total-datasets').textContent = data.total_datasets;
+                    document.getElementById('total-records').textContent = data.total_records.toLocaleString();
+                    document.getElementById('models-loaded').textContent = data.models_loaded;
+                })
+                .catch(error => console.error('Error loading stats:', error));
+        }
+
+        function showLoading(id) {
+            document.getElementById(id + '-loading').classList.add('show');
+            document.getElementById(id + '-result').classList.remove('show');
+        }
+
+        function hideLoading(id) {
+            document.getElementById(id + '-loading').classList.remove('show');
+        }
+
+        function showResult(id) {
+            document.getElementById(id + '-result').classList.add('show');
+        }
+
+        function predictHealth() {
+            const days = parseInt(document.getElementById('health-days').value);
+            showLoading('health');
+
+            fetch('/api/predict/health', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({days: days})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('health');
+                
+                // Check for errors
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+                
+                const content = document.getElementById('health-content');
+                const average = data.average !== undefined ? data.average : 0;
+                const trend = data.trend || 'unknown';
+                const forecast = data.forecast || [];
+                
+                content.innerHTML = `
+                    <div class="result-item"><strong>Forecast Period:</strong> ${data.days || 0} days</div>
+                    <div class="result-item"><strong>Average Cases:</strong> ${average.toFixed(1)}</div>
+                    <div class="result-item"><strong>Trend:</strong> <span class="badge ${trend === 'increasing' ? 'badge-warning' : 'badge-success'}">${trend.toUpperCase()}</span></div>
+                    <div class="result-item"><strong>Daily Forecast:</strong></div>
+                    <div style="margin-top:10px;">
+                        ${forecast.map((v, i) => `<span class="badge badge-info">Day ${i+1}: ${(v || 0).toFixed(0)} cases</span>`).join('')}
+                    </div>
+                `;
+                showResult('health');
+            })
+            .catch(error => {
+                hideLoading('health');
+                alert('Error: ' + error);
+            });
+        }
+
+        function predictInfrastructure() {
+            const response_time = parseInt(document.getElementById('infra-response').value);
+            const satisfaction = parseInt(document.getElementById('infra-satisfaction').value);
+            const recurring = parseInt(document.getElementById('infra-recurring').value);
+            
+            showLoading('infra');
+
+            fetch('/api/predict/infrastructure', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    response_time: response_time,
+                    satisfaction: satisfaction,
+                    recurring: recurring
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('infra');
+                const content = document.getElementById('infra-content');
+                const riskClass = data.risk_level === 'HIGH' ? 'badge-danger' : (data.risk_level === 'MEDIUM' ? 'badge-warning' : 'badge-success');
+                content.innerHTML = `
+                    <div class="result-item"><strong>Risk Level:</strong> <span class="badge ${riskClass}">${data.risk_level}</span></div>
+                    <div class="result-item"><strong>Failure Probability:</strong> ${(data.failure_probability * 100).toFixed(1)}%</div>
+                    <div class="result-item"><strong>Recommendation:</strong> ${data.recommendation}</div>
+                `;
+                showResult('infra');
+            })
+            .catch(error => {
+                hideLoading('infra');
+                alert('Error: ' + error);
+            });
+        }
+
+        function predictDemand() {
+            const hours = parseInt(document.getElementById('demand-hours').value);
+            showLoading('demand');
+
+            fetch('/api/predict/demand', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({hours: hours})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('demand');
+                const content = document.getElementById('demand-content');
+                content.innerHTML = `
+                    <div class="result-item"><strong>Forecast Period:</strong> ${data.hours} hours</div>
+                    <div class="result-item"><strong>Average Demand:</strong> ${data.average_demand.toFixed(0)} requests/hour</div>
+                    <div class="result-item"><strong>Peak Hour:</strong> Hour ${data.peak_hour.hour} (${data.peak_hour.predicted_demand} requests)</div>
+                    <div class="result-item"><strong>Hourly Forecast (first 12h):</strong></div>
+                    <div style="margin-top:10px;">
+                        ${data.forecast.slice(0, 12).map(f => `<span class="badge badge-info">H${f.hour}: ${f.predicted_demand}</span>`).join('')}
+                    </div>
+                `;
+                showResult('demand');
+            })
+            .catch(error => {
+                hideLoading('demand');
+                alert('Error: ' + error);
+            });
+        }
+
+        function analyzeSentiment() {
+            const text = document.getElementById('sentiment-text').value;
+            const rating = parseInt(document.getElementById('sentiment-rating').value);
+            
+            if (!text.trim()) {
+                alert('Please enter feedback text');
+                return;
+            }
+
+            showLoading('sentiment');
+
+            fetch('/api/analyze/sentiment', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text, rating: rating})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('sentiment');
+                const content = document.getElementById('sentiment-content');
+                const sentimentClass = data.sentiment === 'Positive' ? 'badge-success' : (data.sentiment === 'Neutral' ? 'badge-warning' : 'badge-danger');
+                content.innerHTML = `
+                    <div class="result-item"><strong>Sentiment:</strong> <span class="badge ${sentimentClass}">${data.sentiment}</span></div>
+                    <div class="result-item"><strong>Confidence:</strong> ${(data.confidence * 100).toFixed(1)}%</div>
+                    <div class="result-item"><strong>Probabilities:</strong></div>
+                    <div style="margin-top:10px;">
+                        <span class="badge badge-success">Positive: ${(data.probabilities.Positive * 100).toFixed(1)}%</span>
+                        <span class="badge badge-warning">Neutral: ${(data.probabilities.Neutral * 100).toFixed(1)}%</span>
+                        <span class="badge badge-danger">Negative: ${(data.probabilities.Negative * 100).toFixed(1)}%</span>
+                    </div>
+                `;
+                showResult('sentiment');
+            })
+            .catch(error => {
+                hideLoading('sentiment');
+                alert('Error: ' + error);
+            });
+        }
+
+        function queryRAG() {
+            const question = document.getElementById('rag-question').value;
+            
+            if (!question.trim()) {
+                alert('Please enter a question');
+                return;
+            }
+
+            showLoading('rag');
+
+            fetch('/api/rag/query', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({question: question})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('rag');
+                const content = document.getElementById('rag-content');
+                content.innerHTML = `
+                    <div class="result-item"><strong>Question:</strong> ${data.question}</div>
+                    <div class="result-item"><strong>Answer:</strong><br>${data.answer}</div>
+                    <div class="result-item"><strong>Sources:</strong> ${data.n_sources} documents</div>
+                `;
+                showResult('rag');
+            })
+            .catch(error => {
+                hideLoading('rag');
+                alert('Error: ' + error);
+            });
+        }
+
+        function anonymizeText() {
+            const text = document.getElementById('anonymize-text').value;
+            
+            if (!text.trim()) {
+                alert('Please enter text to anonymize');
+                return;
+            }
+
+            showLoading('anonymize');
+
+            fetch('/api/anonymize', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('anonymize');
+                const content = document.getElementById('anonymize-content');
+                content.innerHTML = `
+                    <div class="result-item"><strong>Original:</strong><br><code>${data.original}</code></div>
+                    <div class="result-item" style="margin-top:10px;"><strong>Anonymized:</strong><br><code>${data.anonymized}</code></div>
+                    <div class="result-item"><strong>PII Detected:</strong> ${data.pii_count} items</div>
+                    <div style="margin-top:10px;">
+                        ${data.pii_types.map(type => `<span class="badge badge-warning">${type}</span>`).join('')}
+                    </div>
+                `;
+                showResult('anonymize');
+            })
+            .catch(error => {
+                hideLoading('anonymize');
+                alert('Error: ' + error);
+            });
+        }
+    </script>
+</body>
+</html>

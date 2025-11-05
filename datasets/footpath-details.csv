@@ -1,0 +1,77 @@
+Prabhag_no,Area,Prabhag Name,length_of_roads_with_footpath_on_both_sides,length_of_roads_with_footpath_on_one_side,Percentage_of_roads_paved,Percentage_of_roads_with_usable_footpaths,length_of_roads,length_of_tar_roads,length_of_concrete_roads
+1,Yerwada,Lohegaon,19.52,0,100,19.42,100.53,80.53,20
+2,Nagar Road,Kharadi Infotech Park,15,0,100,25,60,50,10
+3,Nagar Road,VimanNagar Sanjay Park,3,4,100,14,50,30,20
+4,Nagar Road,Nagpur Chawl,20,10,100,44.12,68,33,35
+5,Yerwada,Vishrantwadi,7,0,100,60.92,11.49,11.49,0
+6,Aundh,Bopodi Gaonthan,3.6,1,70.59,90.2,5.1,3.6,0
+7,Aundh,Pune University,4,1,100,38.46,13,7,6
+8,Aundh,Aundh ITI,0,0,100,0,10,8.4,1.6
+9,Aundh,Baner Balewadi,15,0,99.52,40.32,37.2,23.22,13.8
+10,Aundh,Pashan Sutarwadi,3,2,100,18.52,27,12,15
+11,Ghole Road,Janwadi - Gokhalenagar,3.5,2.5,100,59.7,10.05,7.25,2.8
+12,Ghole Road,Model Colony,25,5,100,100,30,20,10
+13,Ghole Road,Narveer Tanajiwadi,5,1.2,100,61.39,10.1,4.8,5.3
+14,Yerwada,Deccan College,8,0,100,84.21,9.5,1.5,8
+15,Yerwada,Rajguru Road,1.01,0,100,10.78,9.37,6.4,2.97
+16,Yerwada,Subashnagar,4,1,100,40,12.5,5,7.5
+17,Nagar Road,Agakhan Palace,5,20,100,62.5,40,30,10
+18,Nagar Road,Vadgaon Sheri,2.4,0,100,5.65,42.5,40,2.5
+19,Nagar Road,Vadgaon Sheri - Ganesh Nagar,0,0,84.37,0,38,30.6,1.46
+20,Dhole Patil,Magarpatta City,4,0.5,100,22.5,20,19.4,0.6
+21,Dhole Patil,Koregaon Park,13.52,1.65,100,64.94,23.36,23.36,0
+22,Dhole Patil,Naidu Hospital,1,0.6,100,22.86,7,5.8,1.2
+23,Dhole Patil,Junabazaar Kumbharwada,1.425,0.7,85.84,37.61,5.65,4.75,0.1
+24,Ghole Road,Balgandharva,11,0,100,36.07,30.5,30,0.5
+25,Ghole Road,Wadarwadi Pandavnagar,1,0.5,100,33.33,4.5,4.4,0.1
+26,Kothrud,MIT Kelewadi,2.458,2.51,100,33.14,14.989,8.994,5.995
+27,Kothrud,Sutardara - Kishkindha Nagar,1.6,2.35,100,26.89,14.688,8.85,5.838
+28,Kothrud,ARDE - Mhatobanagar,0.48,1.15,100,10.31,15.804,8.67,7.134
+29,Kothrud,Bavdhan Khurd,0.4,1.65,100,9.8,20.914,12.06,8.854
+30,Warje Karvenagar,Popularnagar Malwadi,3.08,1.237,100,15.9,27.149,22.155,4.994
+31,Warje Karvenagar,Shivane - Warje - Ramnagar,0,0,100,0,25.96,25.36,0.6
+32,Warje Karvenagar,Karvenagar - Gosavivasti,0,2.27,100,12.71,17.86,15,2.86
+33,Warje Karvenagar,Dahanukar Colony ,10.4,2.6,100,100,13,2,11
+34,Kothrud,Gujrat Colony,0.5,1.04,100,5.89,26.16,14.39,11.77
+35,Warje Karvenagar,Deenanth Mangeshkar Hospital,8,4,99.83,40.61,29.55,28.9,0.6
+36,Ghole Road,Kamla Nehru Park,8,1,100,30,30,25.5,4.5
+37,Kasba Vishrambagwada ,Shaniwarwada,5,4,100,100,9,7,2
+38,Kasba Vishrambagwada ,Kasba Peth,6,0,100,40,15,7.5,7.5
+39,Bhawani,KEM hospital,3.2,2,100,94.8,5.485,4.385,1.1
+40,Dhole Patil,Collectorate,6,6,100,75.95,15.8,14.6,1.2
+41,Kondhwa,Sopan Baug Vikas Nagar,2.6,0.4,100,20.01,14.99,11.79,3.2
+42,Hadapsar,Lohiya Garden,6,4,100,15.63,64,40,24
+43,Hadapsar,Sadhana Vidyalaya,3,2,100,7.14,70,50,20
+44,Hadapsar,Gliding Centre,8,2,100,11.11,90,9,81
+45,Hadapsar,Mohammadwadi,4,2,100,4.76,126,70,56
+46,Kondhwa,Wanavdi - Ramtekdi,1.6,0.9,100,10.22,24.45,22.4,2.05
+47,Bhawani,Arunkumar Vaidya Stadium,3,0.5,100,72.92,4.8,3.9,0.9
+48,Bhawani,Palkhi Vithoba Mandir,2,3.5,100,91.67,6,4.5,1.5
+49,Kasba Vishrambagwada ,Dr. Kotnis hospital,2.5,0,100,25.94,9.636,7.358,2.278
+50,Kasba Vishrambagwada ,Mahatma Phule Mandal,5,0,100,60.46,8.27,8.17,0.1
+51,Kasba Vishrambagwada ,Tilak Smarak Mandir,5,0,100,31.25,16,14.5,1.5
+52,Tilak Road,Vaikunth Samshanbhoomi,10.32,16.22,100,89.97,29.5,17.7,11.8
+53,Tilak Road,PL Deshpande Udyan,1,0,100,3.95,25.34,22,3.34
+54,Tilak Road,Suncity Wadgaon Budruk,2.4,0.2,93.26,7.12,36.5,27.31,6.73
+55,Tilak Road,Janata Vasahat,1,2,100,14.29,21,19,2
+56,Tilak Road,Sarasbaug Parvati,0,2.25,96.47,13.25,16.98,6.26,10.12
+57,Sahakarnagar,Kadakmal Ali Hirabaug,0,9,100,58.25,15.45,13.84,1.61
+58,Kasba Vishrambagwada ,Mahatma Phule Smarak,5,1,100,75,8,6.8,1.2
+59,Bhawani,Kashewadi Grunanaknagar,2,1.6,86.54,69.23,5.2,3,1.5
+60,Bhawani,Mahatma Phule Peth Kashewadi Bhawani Peth,1,3,100,76.19,5.25,4,1.25
+61,Kondhwa,Kedar Vasti- Azadnagar,1.5,2,100,13.09,26.73,24.591,2.1384
+62,Kondhwa,Kondhwa Budruk Gokulnagar,6,2,65.33,16.18,49.44,24.7,7.6
+63,Kondhwa,Bhagyodaynagar,0,2.5,99.97,7.62,32.829,29.82,3
+64,Bibewadi,Salisbury Park,13.45,0,100,100,13.45,8.46,4.99
+65,Bhawani,Ghorpade Garden,1.5,1.5,100,53.71,5.586,4.421,1.165
+66,Sahakarnagar,Adinath Society,2,0,100,10,20,16,4
+67,Sahakarnagar,Aranyeshwar Taware Colony,0,1.7,100,6.54,26,21.7,4.3
+68,Sahakarnagar,Taljai,3.5,0,100,17.2,20.35,13.7,6.65
+69,Dhanakawadi,Dhanakawadi Padmavati,5,1,100,13.04,46,34,12
+70,Bibewadi,Bibewadi and KK Market,11.2,5.8,100,60.5,28.1,19.32,8.78
+71,Bibewadi,Shivaji Market Gultekwadi,17.47,0,100,100,17.47,10.21,7.26
+72,Bibewadi,Upper Indiranagar,5,0,100,14.58,34.3,20,14.3
+73,Dhanakawadi,Balajinagar Vaibhavnagar,4,0,100,66.67,6,2.1,3.9
+74,Dhanakawadi,Bharti Vidyapeeth,1.1,1.2,100,7.73,29.75,19.55,10.2
+75,Dhanakawadi,Katraj Dairy,4,1,100,10,50,35,15
+76,Dhanakawadi,Katraj Maulinagar,1.05,0,100,4.21,24.95,24,0.95

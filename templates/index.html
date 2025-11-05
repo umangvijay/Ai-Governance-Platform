@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Governance Platform - Maharashtra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+            --glow: rgba(99, 102, 241, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(99, 102, 241, 0.03) 2px,
+                rgba(99, 102, 241, 0.03) 4px
+            );
+            animation: gridMove 60s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 32px;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            margin-bottom: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            animation: textGradient 3s ease infinite;
+            position: relative;
+        }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: underlineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes underlineGlow {
+            0%, 100% { opacity: 0.5; width: 60%; }
+            50% { opacity: 1; width: 80%; }
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: statPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes statPulse {
+            0%, 100% { 
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
+            }
+            50% { 
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 0 20px rgba(99, 102, 241, 0.3); 
+            }
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(99, 102, 241, 0.1) 50%,
+                transparent 70%
+            );
+            animation: statShine 3s linear infinite;
+        }
+
+        @keyframes statShine {
+            0% { transform: translate(-100%, -100%) rotate(0deg); }
+            100% { transform: translate(100%, 100%) rotate(360deg); }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.4), 0 0 30px var(--glow);
+            animation: none;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            animation: cardFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 40px var(--glow);
+            animation: none;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.375rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.9375rem;
+            font-family: inherit;
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: text;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 0 0 3px var(--glow);
+            transform: translateY(-1px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.6;
+        }
+
+        textarea::placeholder,
+        input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        textarea:hover,
+        input:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px var(--glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px var(--glow), 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box h4 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .result-item {
+            margin: 8px 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .result-box p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .loading p {
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .chart {
+            margin-top: 15px;
+            max-height: 300px;
+        }
+
+        .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏛️ AI Governance Platform</h1>
+            <p>Transforming Citizen Service Delivery in Maharashtra</p>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value" id="total-datasets">-</div>
+                <div class="stat-label">Datasets Loaded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="total-records">-</div>
+                <div class="stat-label">Total Records</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="models-loaded">-</div>
+                <div class="stat-label">ML Models Active</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">✓</div>
+                <div class="stat-label">System Status</div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <!-- Health Risk Prediction -->
+            <div class="feature-card">
+                <div class="icon">🏥</div>
+                <h3>Health Risk Predictor</h3>
+                <p>Forecast disease outbreak risks and healthcare demand</p>
+                
+                <div class="input-group">
+                    <label>Forecast Days:</label>
+                    <input type="number" id="health-days" value="7" min="1" max="30">
+                </div>
+                
+                <button class="btn" onclick="predictHealth()">Generate Forecast</button>
+                
+                <div class="loading" id="health-loading">
+                    <div class="spinner"></div>
+                    <p>Generating prediction...</p>
+                </div>
+                
+                <div class="result-box" id="health-result">
+                    <h4>Health Risk Forecast</h4>
+                    <div id="health-content"></div>
+                </div>
+            </div>
+
+            <!-- Infrastructure Risk -->
+            <div class="feature-card">
+                <div class="icon">🏗️</div>
+                <h3>Infrastructure Failure Predictor</h3>
+                <p>Identify high-risk infrastructure locations</p>
+                
+                <div class="input-group">
+                    <label>Response Time (hours):</label>
+                    <input type="number" id="infra-response" value="24" min="1" max="168">
+                </div>
+                
+                <div class="input-group">
+                    <label>Citizen Satisfaction (1-5):</label>
+                    <input type="number" id="infra-satisfaction" value="3" min="1" max="5">
+                </div>
+                
+                <div class="input-group">
+                    <label>Recurring Issue:</label>
+                    <select id="infra-recurring">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <button class="btn" onclick="predictInfrastructure()">Predict Risk</button>
+                
+                <div class="loading" id="infra-loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing risk...</p>
+                </div>
+                
+                <div class="result-box" id="infra-result">
+                    <h4>Risk Assessment</h4>
+                    <div id="infra-content"></div>
+                </div>
+            </div>
+
+            <!-- Demand Forecasting -->
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Service Demand Forecaster</h3>
+                <p>Predict future service request volumes</p>
+                
+                <div class="input-group">
+                    <label>Forecast Hours:</label>
+                    <input type="number" id="demand-hours" value="24" min="1" max="72">
+                </div>
+                
+                <button class="btn" onclick="predictDemand()">Forecast Demand</button>
+                
+                <div class="loading" id="demand-loading">
+                    <div class="spinner"></div>
+                    <p>Forecasting demand...</p>
+                </div>
+                
+                <div class="result-box" id="demand-result">
+                    <h4>Demand Forecast</h4>
+                    <div id="demand-content"></div>
+                </div>
+            </div>
+
+            <!-- Sentiment Analysis -->
+            <div class="feature-card">
+                <div class="icon">💬</div>
+                <h3>Sentiment Analyzer</h3>
+                <p>Analyze citizen feedback sentiment</p>
+                
+                <div class="input-group">
+                    <label>Citizen Feedback:</label>
+                    <textarea id="sentiment-text" rows="3" placeholder="Enter citizen feedback here..."></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label>Rating (1-5):</label>
+                    <input type="number" id="sentiment-rating" value="3" min="1" max="5">
+                </div>
+                
+                <button class="btn" onclick="analyzeSentiment()">Analyze Sentiment</button>
+                
+                <div class="loading" id="sentiment-loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing sentiment...</p>
+                </div>
+                
+                <div class="result-box" id="sentiment-result">
+                    <h4>Sentiment Analysis</h4>
+                    <div id="sentiment-content"></div>
+                </div>
+            </div>
+
+            <!-- RAG Query -->
+            <div class="feature-card">
+                <div class="icon">🤖</div>
+                <h3>AI Assistant (RAG)</h3>
+                <p>Ask questions about governance data</p>
+                
+                <div class="input-group">
+                    <label>Your Question:</label>
+                    <textarea id="rag-question" rows="3" placeholder="Ask anything about the data..."></textarea>
+                </div>
+                
+                <button class="btn" onclick="queryRAG()">Ask AI</button>
+                
+                <div class="loading" id="rag-loading">
+                    <div class="spinner"></div>
+                    <p>Thinking...</p>
+                </div>
+                
+                <div class="result-box" id="rag-result">
+                    <h4>AI Response</h4>
+                    <div id="rag-content"></div>
+                </div>
+            </div>
+
+            <!-- Data Anonymization -->
+            <div class="feature-card">
+                <div class="icon">🔒</div>
+                <h3>Data Anonymizer</h3>
+                <p>Detect and mask personally identifiable information</p>
+                
+                <div class="input-group">
+                    <label>Text with PII:</label>
+                    <textarea id="anonymize-text" rows="3" placeholder="Enter text with phone numbers, emails, etc..."></textarea>
+                </div>
+                
+                <button class="btn" onclick="anonymizeText()">Anonymize</button>
+                
+                <div class="loading" id="anonymize-loading">
+                    <div class="spinner"></div>
+                    <p>Anonymizing...</p>
+                </div>
+                
+                <div class="result-box" id="anonymize-result">
+                    <h4>Anonymized Result</h4>
+                    <div id="anonymize-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>🚀 AI-Powered Governance Platform for Maharashtra</p>
+            <p>© 2025 - Transforming Citizen Service Delivery with AI</p>
+        </footer>
+    </div>
+
+    <script>
+        // Load stats on page load
+        window.addEventListener('load', loadStats);
+
+        function loadStats() {
+            fetch('/api/stats')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('total-datasets').textContent = data.total_datasets;
+                    document.getElementById('total-records').textContent = data.total_records.toLocaleString();
+                    document.getElementById('models-loaded').textContent = data.models_loaded;
+                })
+                .catch(error => console.error('Error loading stats:', error));
+        }
+
+        function showLoading(id) {
+            document.getElementById(id + '-loading').classList.add('show');
+            document.getElementById(id + '-result').classList.remove('show');
+        }
+
+        function hideLoading(id) {
+            document.getElementById(id + '-loading').classList.remove('show');
+        }
+
+        function showResult(id) {
+            document.getElementById(id + '-result').classList.add('show');
+        }
+
+        function predictHealth() {
+            const days = parseInt(document.getElementById('health-days').value);
+            showLoading('health');
+
+            fetch('/api/predict/health', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({days: days})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('health');
+                
+                const content = document.getElementById('health-content');
+                
+                // Check for errors
+                if (data.error) {
+                    content.innerHTML = `
+                        <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                            <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                            <div style="color: #f87171;">${data.error}</div>
+                            <div style="margin-top: 10px; font-size: 0.9em; color: #94a3b8;">
+                                Please wait for models to train or refresh the page.
+                            </div>
+                        </div>
+                    `;
+                    showResult('health');
+                    return;
+                }
+                
+                const average = data.average !== undefined ? data.average : 0;
+                const trend = data.trend || 'unknown';
+                const forecast = data.forecast || [];
+                
+                content.innerHTML = `
+                    <div class="result-item"><strong>Forecast Period:</strong> ${data.days || 0} days</div>
+                    <div class="result-item"><strong>Average Cases:</strong> ${average.toFixed(1)}</div>
+                    <div class="result-item"><strong>Trend:</strong> <span class="badge ${trend === 'increasing' ? 'badge-warning' : 'badge-success'}">${trend.toUpperCase()}</span></div>
+                    <div class="result-item"><strong>Daily Forecast:</strong></div>
+                    <div style="margin-top:10px;">
+                        ${forecast.map((v, i) => `<span class="badge badge-info">Day ${i+1}: ${(v || 0).toFixed(0)} cases</span>`).join('')}
+                    </div>
+                `;
+                showResult('health');
+            })
+            .catch(error => {
+                hideLoading('health');
+                const content = document.getElementById('health-content');
+                content.innerHTML = `
+                    <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                        <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                        <div style="color: #f87171;">${error}</div>
+                    </div>
+                `;
+                showResult('health');
+            });
+        }
+
+        function predictInfrastructure() {
+            const response_time = parseInt(document.getElementById('infra-response').value);
+            const satisfaction = parseInt(document.getElementById('infra-satisfaction').value);
+            const recurring = parseInt(document.getElementById('infra-recurring').value);
+            
+            showLoading('infra');
+
+            fetch('/api/predict/infrastructure', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    response_time: response_time,
+                    satisfaction: satisfaction,
+                    recurring: recurring
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('infra');
+                const content = document.getElementById('infra-content');
+                
+                // Check for errors
+                if (data.error) {
+                    content.innerHTML = `
+                        <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                            <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                            <div style="color: #f87171;">${data.error}</div>
+                            <div style="margin-top: 10px; font-size: 0.9em; color: #94a3b8;">
+                                Please wait for models to train or refresh the page.
+                            </div>
+                        </div>
+                    `;
+                    showResult('infra');
+                    return;
+                }
+                
+                const riskClass = data.risk_level === 'HIGH' ? 'badge-danger' : (data.risk_level === 'MEDIUM' ? 'badge-warning' : 'badge-success');
+                content.innerHTML = `
+                    <div class="result-item"><strong>Risk Level:</strong> <span class="badge ${riskClass}">${data.risk_level}</span></div>
+                    <div class="result-item"><strong>Failure Probability:</strong> ${(data.failure_probability * 100).toFixed(1)}%</div>
+                    <div class="result-item"><strong>Recommendation:</strong> ${data.recommendation}</div>
+                `;
+                showResult('infra');
+            })
+            .catch(error => {
+                hideLoading('infra');
+                const content = document.getElementById('infra-content');
+                content.innerHTML = `
+                    <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                        <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                        <div style="color: #f87171;">${error}</div>
+                    </div>
+                `;
+                showResult('infra');
+            });
+        }
+
+        function predictDemand() {
+            const hours = parseInt(document.getElementById('demand-hours').value);
+            showLoading('demand');
+
+            fetch('/api/predict/demand', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({hours: hours})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('demand');
+                const content = document.getElementById('demand-content');
+                
+                // Check for errors
+                if (data.error) {
+                    content.innerHTML = `
+                        <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                            <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                            <div style="color: #f87171;">${data.error}</div>
+                            <div style="margin-top: 10px; font-size: 0.9em; color: #94a3b8;">
+                                Please wait for models to train or refresh the page.
+                            </div>
+                        </div>
+                    `;
+                    showResult('demand');
+                    return;
+                }
+                
+                const forecast = data.forecast || [];
+                const avgDemand = data.average_demand || 0;
+                const peakHour = data.peak_hour || {hour: 0, predicted_demand: 0};
+                
+                content.innerHTML = `
+                    <div class="result-item"><strong>Forecast Period:</strong> ${data.hours} hours</div>
+                    <div class="result-item"><strong>Average Demand:</strong> ${avgDemand.toFixed(0)} requests/hour</div>
+                    <div class="result-item"><strong>Peak Hour:</strong> Hour ${peakHour.hour} (${peakHour.predicted_demand} requests)</div>
+                    <div class="result-item"><strong>Hourly Forecast (first 12h):</strong></div>
+                    <div style="margin-top:10px;">
+                        ${forecast.slice(0, 12).map(f => `<span class="badge badge-info">H${f.hour}: ${f.predicted_demand}</span>`).join('')}
+                    </div>
+                `;
+                showResult('demand');
+            })
+            .catch(error => {
+                hideLoading('demand');
+                const content = document.getElementById('demand-content');
+                content.innerHTML = `
+                    <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                        <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                        <div style="color: #f87171;">${error}</div>
+                    </div>
+                `;
+                showResult('demand');
+            });
+        }
+
+        function analyzeSentiment() {
+            const text = document.getElementById('sentiment-text').value;
+            const rating = parseInt(document.getElementById('sentiment-rating').value);
+            
+            if (!text.trim()) {
+                alert('Please enter feedback text');
+                return;
+            }
+
+            showLoading('sentiment');
+
+            fetch('/api/analyze/sentiment', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text, rating: rating})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('sentiment');
+                const content = document.getElementById('sentiment-content');
+                
+                // Check for errors
+                if (data.error) {
+                    content.innerHTML = `
+                        <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                            <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                            <div style="color: #f87171;">${data.error}</div>
+                            <div style="margin-top: 10px; font-size: 0.9em; color: #94a3b8;">
+                                Please wait for models to train or refresh the page.
+                            </div>
+                        </div>
+                    `;
+                    showResult('sentiment');
+                    return;
+                }
+                
+                const sentimentClass = data.sentiment === 'Positive' ? 'badge-success' : (data.sentiment === 'Neutral' ? 'badge-warning' : 'badge-danger');
+                const confidence = data.confidence || 0;
+                const probabilities = data.probabilities || {Positive: 0, Neutral: 0, Negative: 0};
+                
+                content.innerHTML = `
+                    <div class="result-item"><strong>Sentiment:</strong> <span class="badge ${sentimentClass}">${data.sentiment}</span></div>
+                    <div class="result-item"><strong>Confidence:</strong> ${(confidence * 100).toFixed(1)}%</div>
+                    <div class="result-item"><strong>Probabilities:</strong></div>
+                    <div style="margin-top:10px;">
+                        <span class="badge badge-success">Positive: ${(probabilities.Positive * 100).toFixed(1)}%</span>
+                        <span class="badge badge-warning">Neutral: ${(probabilities.Neutral * 100).toFixed(1)}%</span>
+                        <span class="badge badge-danger">Negative: ${(probabilities.Negative * 100).toFixed(1)}%</span>
+                    </div>
+                `;
+                showResult('sentiment');
+            })
+            .catch(error => {
+                hideLoading('sentiment');
+                const content = document.getElementById('sentiment-content');
+                content.innerHTML = `
+                    <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                        <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                        <div style="color: #f87171;">${error}</div>
+                    </div>
+                `;
+                showResult('sentiment');
+            });
+        }
+
+        function queryRAG() {
+            const question = document.getElementById('rag-question').value;
+            
+            if (!question.trim()) {
+                alert('Please enter a question');
+                return;
+            }
+
+            showLoading('rag');
+
+            fetch('/api/rag/query', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({question: question})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('rag');
+                const content = document.getElementById('rag-content');
+                content.innerHTML = `
+                    <div class="result-item"><strong>Question:</strong> ${data.question}</div>
+                    <div class="result-item"><strong>Answer:</strong><br>${data.answer}</div>
+                    <div class="result-item"><strong>Sources:</strong> ${data.n_sources} documents</div>
+                `;
+                showResult('rag');
+            })
+            .catch(error => {
+                hideLoading('rag');
+                alert('Error: ' + error);
+            });
+        }
+
+        function anonymizeText() {
+            const text = document.getElementById('anonymize-text').value;
+            
+            if (!text.trim()) {
+                alert('Please enter text to anonymize');
+                return;
+            }
+
+            showLoading('anonymize');
+
+            fetch('/api/anonymize', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading('anonymize');
+                const content = document.getElementById('anonymize-content');
+                
+                // Check for errors
+                if (data.error) {
+                    content.innerHTML = `
+                        <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                            <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                            <div style="color: #f87171;">${data.error}</div>
+                            <div style="margin-top: 10px; font-size: 0.9em; color: #94a3b8;">
+                                Please wait for initialization or refresh the page.
+                            </div>
+                        </div>
+                    `;
+                    showResult('anonymize');
+                    return;
+                }
+                
+                const piiTypes = data.pii_types || [];
+                
+                content.innerHTML = `
+                    <div class="result-item"><strong>Original:</strong><br><code>${data.original}</code></div>
+                    <div class="result-item" style="margin-top:10px;"><strong>Anonymized:</strong><br><code>${data.anonymized}</code></div>
+                    <div class="result-item"><strong>PII Detected:</strong> ${data.pii_count} items</div>
+                    <div style="margin-top:10px;">
+                        ${piiTypes.map(type => `<span class="badge badge-warning">${type}</span>`).join('')}
+                    </div>
+                `;
+                showResult('anonymize');
+            })
+            .catch(error => {
+                hideLoading('anonymize');
+                const content = document.getElementById('anonymize-content');
+                content.innerHTML = `
+                    <div style="padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                        <div style="font-weight: 600; color: #ef4444; margin-bottom: 10px;">⚠️ Error</div>
+                        <div style="color: #f87171;">${error}</div>
+                    </div>
+                `;
+                showResult('anonymize');
+            });
+        }
+    </script>
+</body>
+</html>
