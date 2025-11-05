@@ -1,5 +1,5 @@
 """
-Real Data Loader from D:\DATASET with synthetic augmentation
+Real Data Loader from a relative 'datasets' folder with synthetic augmentation
 """
 
 import os
@@ -17,16 +17,21 @@ load_dotenv()
 
 
 class RealDataLoader:
-    """Load real data from D:\DATASET and augment with synthetic data"""
+    """Load real data from a relative 'datasets' folder and augment with synthetic data"""
     
     def __init__(self):
-        self.dataset_path = os.getenv('DATASET_PATH', r'D:\DATASET')
-        self.dataset_new_path = os.getenv('DATASET_NEW_PATH', r'D:\DATASET WITH NEW DATA Set')
+        # 1. Get the project's ROOT directory
+        #    (Path(__file__) is this file, .parent is 'data', .parent.parent is the root)
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        
+        # 2. Define the path to your new 'datasets' folder
+        self.data_path = BASE_DIR / "datasets"
+        # ---------------------
+        
         self.data = {}
         
         logger.info(f"DataLoader initialized")
-        logger.info(f"Primary path: {self.dataset_path}")
-        logger.info(f"Secondary path: {self.dataset_new_path}")
+        logger.info(f"Looking for data in: {self.data_path}")
     
     def load_all_datasets(self) -> Dict[str, pd.DataFrame]:
         """Load all available datasets"""
@@ -34,12 +39,8 @@ class RealDataLoader:
         logger.info("LOADING REAL DATASETS")
         logger.info("=" * 80)
         
-        # Load from primary path
-        self._load_from_directory(self.dataset_path)
-        
-        # Load from secondary path if exists
-        if os.path.exists(self.dataset_new_path):
-            self._load_from_directory(self.dataset_new_path)
+        # Load from the single, relative data_path
+        self._load_from_directory(self.data_path)
         
         # Augment with synthetic data if needed
         self._augment_datasets()
@@ -50,16 +51,15 @@ class RealDataLoader:
         
         return self.data
     
-    def _load_from_directory(self, directory: str):
+    def _load_from_directory(self, directory: Path):
         """Load all CSV and Excel files from directory"""
-        if not os.path.exists(directory):
+        
+        if not directory.exists():
             logger.warning(f"Directory not found: {directory}")
             return
         
-        path = Path(directory)
-        
         # Load CSV files
-        for csv_file in path.glob('*.csv'):
+        for csv_file in directory.glob('*.csv'):
             try:
                 logger.info(f"Loading: {csv_file.name}")
                 df = pd.read_csv(csv_file, encoding='utf-8', on_bad_lines='skip')
@@ -76,7 +76,7 @@ class RealDataLoader:
                 logger.error(f"Error loading {csv_file.name}: {e}")
         
         # Load Excel files
-        for excel_file in path.glob('*.xls*'):
+        for excel_file in directory.glob('*.xls*'): # <-- This line is now fixed
             try:
                 logger.info(f"Loading: {excel_file.name}")
                 df = pd.read_excel(excel_file)
